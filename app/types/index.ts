@@ -1,4 +1,4 @@
-import { Listing, User } from "@prisma/client";
+import { Listing, Reservation, User } from "@prisma/client";
 
 // We are sanitizing data by not sending Date objects to the client components!
 
@@ -17,3 +17,13 @@ export type SafeUser = Omit<
     updatedAt: string;
     emailVerified: string;
 };
+
+export type SafeReservation = Omit<
+    Reservation,
+    "createdAt" | "startDate" | "endDate" | "listing"
+> & {
+    createdAt: string;
+    startDate: string;
+    endDate: string;
+    listing: SafeListing;
+}
